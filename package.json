@@ -1,0 +1,14 @@
+{
+  "name": "supermarket_comparision",
+  "version": "1.0.0",
+  "description": "A search tool to compare products in different supermarkets in Austria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lena Ebner",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-web-scraper": "^6.0.0"
+  }
+}
