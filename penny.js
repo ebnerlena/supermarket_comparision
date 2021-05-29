@@ -34,7 +34,7 @@ const fs = require('fs');
 
     await scraper.scrape(penny)
     const data = penny.getData()
-    fs.writeFile('./penny-data.json', JSON.stringify(data), () => { })
+    fs.writeFile('./data/penny-data.json', JSON.stringify(data), () => { })
 
 })();    
 

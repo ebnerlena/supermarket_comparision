@@ -13,7 +13,7 @@ const fs = require('fs');
     const config = {
         baseSiteUrl: `https://www.hofer.at/de/sortiment/`,
         startUrl: `https://www.hofer.at/de/sortiment/`,
-        filePath: './images/',
+        filePath: './images/hofer_all/',
         concurrency: 10,
         maxRetries: 3,     
         logPath: './logs/hofer_all/'
@@ -51,8 +51,8 @@ const fs = require('fs');
     await scraper.scrape(hofer);
 
     const data = hofer.getData()
-    fs.writeFile('./data.json', JSON.stringify(data), () => { })
+    fs.writeFile('./data/hofer_all.json', JSON.stringify(data), () => { })
 
-    fs.writeFile('./pages.json', JSON.stringify(pages), () => { })
+    fs.writeFile('./data/hofer_pages.json', JSON.stringify(pages), () => { })
 
 })();    

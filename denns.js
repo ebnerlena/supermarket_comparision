@@ -46,7 +46,7 @@ const fs = require('fs');
 
     await scraper.scrape(denns)
     const data = denns.getData()
-    fs.writeFile('./denns-data.json', JSON.stringify(data), () => { })
+    fs.writeFile('./data/denns-data.json', JSON.stringify(data), () => { })
 
 })();    
 

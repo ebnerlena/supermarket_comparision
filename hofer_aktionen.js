@@ -43,6 +43,6 @@ const fs = require('fs');
     await scraper.scrape(hofer);
 
     const data = hofer.getData()
-    fs.writeFile('./hofer_aktionen.json', JSON.stringify(data), () => { })
+    fs.writeFile('./data/hofer_aktionen.json', JSON.stringify(data), () => { })
 
 })();    

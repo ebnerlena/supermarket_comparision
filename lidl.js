@@ -58,7 +58,7 @@ const fs = require('fs');
 
     await scraper.scrape(lidl)
     const data = lidl.getData()
-    fs.writeFile('./lidl-data.json', JSON.stringify(data), () => { })
+    fs.writeFile('./data/lidl-data.json', JSON.stringify(data), () => { })
 
 })();    
 
