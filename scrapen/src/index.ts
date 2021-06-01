@@ -14,7 +14,7 @@ interface Product {
 }
 
 const data: Product[] = {} as Product[];
-let productCnt: number = 0;
+let productCnt = 0;
 
 const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
   const browser = await chromium.launch({
@@ -42,7 +42,7 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         };
 
         const titles = product.querySelectorAll(supermarketSelector.titles);
-        let text: string = "";
+        let text: string;
 
         titles.forEach((title: HTMLElement) => {
           text = title.innerText.toLowerCase().trim();
@@ -58,7 +58,7 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         if (singleProduct.title === "") return;
 
         const price = product.querySelector(selectors.prices);
-        let nr: number = 0;
+        let nr: number;
         text = price?.innerText.trim().replace(/ /g, ".").replace("€", "");
         nr = text ? parseFloat(text) : 0;
         singleProduct.price = nr; // not tested if working
