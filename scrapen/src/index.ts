@@ -57,13 +57,13 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         // for hofer site - for filialfinder and flugblätter item
         if (singleProduct.title === "") return;
 
-        const price = product.querySelector(selectors.prices);
+        const price = product.querySelector(supermarketSelector.prices);
         let nr: number;
         text = price?.innerText.trim().replace(/ /g, ".").replace("€", "");
         nr = text ? parseFloat(text) : 0;
         singleProduct.price = nr; // not tested if working
 
-        if (supermarketLabel === "hofer") {
+        if (object.supermarketLabel === "hofer") {
           const possibleQuantityFields = product.querySelectorAll(
             supermarketSelector.quantity
           );
