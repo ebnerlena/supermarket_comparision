@@ -59,15 +59,15 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
 
         const price = product.querySelector(supermarketSelector.prices);
         let nr: number;
-        text = price?.innerText.trim().replace(/ /g, ".").replace("€", "");
+        text = price?.innerText.trim().replace(/\g+|\,/,".").replace(/\€+|\-/, "");
         nr = text ? parseFloat(text) : 0;
-        singleProduct.price = nr; // not tested if working
+        singleProduct.price = nr;
 
         if (object.supermarketLabel === "hofer") {
           const possibleQuantityFields = product.querySelectorAll(
             supermarketSelector.quantity
           );
-          possibleQuantityFields.forEach((field) => {
+          possibleQuantityFields.forEach((field: HTMLElement) => {
             if (field.innerText.includes("per"))
               singleProduct.quantity = field.innerText.trim();
           });
@@ -109,15 +109,15 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
   for (let i = 0; i < supermarkets.length; i++) {
     const supermarket = supermarkets[i];
 
-    // supermarket.pages foreach
-
-    await scrapeSupermarketPage({
-      url: supermarket.pages[0],
-      supermarketLabel: supermarket.title,
-      selectors: supermarket.selectors,
-    });
+    for(let j = 0; j < supermarket.pages.length; j++) {
+      await scrapeSupermarketPage({
+        url: supermarket.pages[j],
+        supermarketLabel: supermarket.title,
+        selectors: supermarket.selectors,
+      });
+    }
   }
 
   const finalProducts = JSON.stringify(data);
-  writeFileSync("./products.json", finalProducts);
+  writeFileSync("./public/products.json", finalProducts);
 })();
