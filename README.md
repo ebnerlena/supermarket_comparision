@@ -18,8 +18,7 @@
 2. Put scraped data on onto solr server
 3. Build Frontend to query data
 
+
 ## Todo
-- include all pages from supermarkets
-- maybe store products as array instead of object
-- test if price parsing is working
+- try to fix images from penny website - only few are found
 
