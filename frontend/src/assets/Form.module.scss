@@ -7,6 +7,8 @@
   padding-bottom: 1rem;
   height: auto;
   font-family: "Montserrat";
+  // display: grid;
+  // grid-template-rows: 1fr auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +21,9 @@
   }
 
   .advancedWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   label {
@@ -46,5 +51,11 @@
   input[type="submit"] {
     border-radius: 5px;
     padding: 0.5rem 1rem;
+    font-weight: bold;
+  }
+
+  select {
+    font-size: 1.1rem;
+    padding: 0.1rem 0.4rem;
   }
 }
