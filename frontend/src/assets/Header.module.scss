@@ -1,0 +1,15 @@
+@import "variables.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: $prussian-blue;
+
+  h1 {
+    font-family: "Fredoka One";
+    letter-spacing: 0.3rem;
+    color: white;
+  }
+}
