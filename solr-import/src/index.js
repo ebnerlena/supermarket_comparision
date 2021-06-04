@@ -10,20 +10,21 @@ export const SUPERMARKET_FIELD = "supermarket_t_sort";
 const SOLR_URL = "https://vm-cyan.multimediatechnology.at/solr/products";
 
 const buildDocument = (product) => {
-    const document = {};
-    document[TITLE_FIELD] = product.title;
-    document[QUANTITY_FIELD] = product.quantity;
-    document[PRICE_FIELD] = product.price;
-    document[IMAGE_FIELD] = product.image;
-  
-    return document;
-  }
+  const document = {};
+  document[TITLE_FIELD] = product.title;
+  document[QUANTITY_FIELD] = product.quantity;
+  document[PRICE_FIELD] = product.price;
+  document[IMAGE_FIELD] = product.image;
+  document[SUPERMARKET_FIELD] = product.supermarket;
+
+  return document;
+};
 
 const commit = async () => {
   await postSolrRequest("update?commit=true");
-}
+};
 
-const postSolrRequest = async(url, body) => {
+const postSolrRequest = async (url, body) => {
   const jsonResponse = await fetch(`${SOLR_URL}/${url}`, {
     method: "POST",
     body: JSON.stringify(body),
@@ -36,27 +37,26 @@ const postSolrRequest = async(url, body) => {
 
   const response = await jsonResponse.json();
   return response.response;
-}
+};
 
-const deleteAll = async() => {
+const deleteAll = async () => {
   await postSolrRequest("update?commit=true", {
-      delete: {
-          query: "*:*",
-      },
+    delete: {
+      query: "*:*",
+    },
   });
-}
+};
 
 const addDocument = async (fields) => {
   await postSolrRequest("update?overwrite=true&commitWithin=1000", [
     { ...fields },
   ]);
-}
+};
 
 (async () => {
   await deleteAll();
 
-  for(let i = 0; i < products.length; i++)
-  {
+  for (let i = 0; i < products.length; i++) {
     await addDocument(buildDocument(products[i]));
   }
 
