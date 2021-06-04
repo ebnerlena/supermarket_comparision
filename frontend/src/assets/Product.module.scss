@@ -50,10 +50,12 @@
     justify-content: center;
     align-items: center;
     grid-area: quantity;
+    background-color: $prussian-blue;
   }
 
   .price {
     display: flex;
+    background-color: $prussian-blue;
     justify-content: flex-end;
     align-items: center;
     grid-area: price;
@@ -70,5 +72,6 @@
     padding-left: 1rem;
     text-transform: uppercase;
     font-size: 1.3rem;
+    background-color: $prussian-blue;
   }
 }
