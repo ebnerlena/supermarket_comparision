@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "./components/Header";
-import "./assets/App.scss";
-import Form from "./components/Form";
-import Results from "./components/Results";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+import React from "react"
+import Header from "./components/Header"
+import "./assets/App.scss"
+import Form from "./components/Form"
+import Results from "./components/Results"
+import store from "./redux/store"
+import { Provider } from "react-redux"
 
 const App: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Results />
       </div>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

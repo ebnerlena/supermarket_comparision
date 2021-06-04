@@ -1,3 +1,30 @@
+@import "variables.scss";
+
 .resultsWrapper {
   width: 100%;
+
+  .resultsMenu {
+    width: 100%;
+    background-color: $prussian-blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      font-size: 1.4rem;
+      padding: 1rem;
+    }
+
+    .sortWrapper {
+      padding: 1rem;
+    }
+  }
+
+  .productsWrapper {
+    padding: 1%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }

@@ -1,0 +1,60 @@
+@import "variables.scss";
+.productBox {
+  background-color: $tuscan-red;
+  border-radius: 10px;
+  height: 300px;
+  min-width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 200px 50px;
+  grid-template-areas:
+    "name name"
+    "image image"
+    "quantity price";
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    grid-area: name;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: $charcoal;
+  }
+
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: image;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .quantity {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-area: quantity;
+    padding-left: 1rem;
+  }
+
+  .price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: price;
+    font-size: 1.3rem;
+    font-family: "Fredoka One";
+    padding-right: 1rem;
+  }
+}
