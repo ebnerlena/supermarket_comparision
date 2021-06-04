@@ -25,6 +25,7 @@ const Results: React.FC = () => {
                 price={prod.price_f}
                 quantity={prod.quantity_txt_de}
                 image={prod.image_url_t}
+                supermarket={prod.supermarket_t_sort}
                 key={prod.id}
               />
             ))}

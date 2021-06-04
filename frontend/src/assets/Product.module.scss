@@ -3,17 +3,21 @@
   background-color: $tuscan-red;
   border-radius: 10px;
   height: 300px;
+  margin-top: 2rem;
+  margin-left: 2rem;
   min-width: 400px;
+  transition: 0.2s ease-in-out all;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  filter: brightness(0.9);
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 50px 200px 50px;
   grid-template-areas:
-    "name name"
-    "image image"
-    "quantity price";
+    "name name name"
+    "image image image"
+    "supermarket quantity price";
 
   &:hover {
-    transform: scale(1.05);
+    filter: brightness(1);
   }
 
   .title {
@@ -22,6 +26,7 @@
     align-items: center;
     border-radius: 10px 10px 0 0;
     grid-area: name;
+    white-space: nowrap;
     font-weight: bold;
     font-size: 1.3rem;
     padding-left: 1rem;
@@ -42,10 +47,9 @@
 
   .quantity {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     grid-area: quantity;
-    padding-left: 1rem;
   }
 
   .price {
@@ -56,5 +60,15 @@
     font-size: 1.3rem;
     font-family: "Fredoka One";
     padding-right: 1rem;
+  }
+
+  .supermarket {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-area: supermarket;
+    padding-left: 1rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
   }
 }

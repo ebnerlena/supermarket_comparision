@@ -14,14 +14,15 @@ const Form: React.FC = () => {
   const [supermarket, setSupermarket] = useState("")
   const [switchStatus, setSwitchStatus] = useState(false)
 
-  useEffect(() => {
-    const queryData: QueryDataType = {
-      searchText: "Karotten",
-      priceRange: "",
-      supermarket: "",
-    }
-    dispatch(queryActionCreator(queryData))
-  })
+  //For Debugging/Styling
+  /* useEffect(() => {
+   *   const queryData: QueryDataType = {
+   *     searchText: "Karotten",
+   *     priceRange: "",
+   *     supermarket: "",
+   *   }
+   *   dispatch(queryActionCreator(queryData))
+   * }) */
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()

@@ -8,6 +8,7 @@ type ProductPropsType = {
   price: number
   quantity: string
   image: string
+  supermarket: string
 }
 
 const Product = ({
@@ -15,6 +16,7 @@ const Product = ({
   price,
   quantity,
   image,
+  supermarket,
 }: ProductPropsType): JSX.Element => {
   return (
     <div className={styles.productBox}>
@@ -22,6 +24,7 @@ const Product = ({
       <div className={styles.imageWrapper}>
         <img src={image} alt="" />
       </div>
+      <span className={styles.supermarket}>{supermarket}</span>
       <span className={styles.quantity}>{quantity}</span>
       <span className={styles.price}>{price} €</span>
     </div>
