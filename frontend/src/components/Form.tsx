@@ -1,9 +1,12 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Switch from "react-switch";
 import styles from "../assets/Form.module.scss";
+import { queryActionCreator } from "../redux/action-creators/query-actioncreator";
 
 const Form: React.FC = () => {
+  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [supermarket, setSupermarket] = useState("");
@@ -11,6 +14,13 @@ const Form: React.FC = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    dispatch(
+      queryActionCreator({
+        searchText: searchText,
+        priceRange: priceRange,
+        supermarket: supermarket,
+      })
+    );
     console.log(searchText);
     console.log(priceRange);
     console.log(supermarket);
