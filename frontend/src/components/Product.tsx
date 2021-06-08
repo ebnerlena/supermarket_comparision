@@ -1,7 +1,5 @@
 import React from "react"
-import { IResponseDoc } from "../types/query-types"
 import styles from "../assets/Product.module.scss"
-import { JsxElement } from "typescript"
 
 type ProductPropsType = {
   title: string

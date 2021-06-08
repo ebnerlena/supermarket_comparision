@@ -13,3 +13,16 @@ export type IResponseDoc = {
   id: string
   _version_: number
 }
+
+export type ISuggestionDoc = {
+  numFound: number
+  startOffset: number
+  origFreq: number
+  suggestion: ISuggestion[]
+  correctlySpelled: boolean
+}
+
+export type ISuggestion = {
+  freq: number
+  word: string
+}

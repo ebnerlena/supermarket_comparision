@@ -1,5 +1,4 @@
 import React, { FormEvent } from "react"
-import { useEffect } from "react"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Switch from "react-switch"
@@ -7,9 +6,13 @@ import styles from "../assets/Form.module.scss"
 import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
 import { QueryDataType } from "../types/query-types"
 
-const Form: React.FC = () => {
+type FormPropsType = {
+  searchQuery: string,
+  setSearchQuery: (query: string) => void
+}
+
+const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
   const dispatch = useDispatch()
-  const [searchText, setSearchText] = useState("")
   const [priceRange, setPriceRange] = useState("")
   const [supermarket, setSupermarket] = useState("")
   const [switchStatus, setSwitchStatus] = useState(false)
@@ -27,13 +30,13 @@ const Form: React.FC = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     const queryData: QueryDataType = {
-      searchText: searchText,
+      searchText: searchQuery,
       priceRange: priceRange,
       supermarket: supermarket,
     }
     dispatch(queryActionCreator(queryData))
 
-    console.log(searchText)
+    console.log(searchQuery)
     console.log(priceRange)
     console.log(supermarket)
   }
@@ -48,9 +51,9 @@ const Form: React.FC = () => {
         <input
           type="text"
           name="searchfield"
-          value={searchText}
+          value={searchQuery}
           placeholder="Enter search query..."
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <input type="submit" name="submit" value="SEARCH" />
         <label>
