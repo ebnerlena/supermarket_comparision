@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Supermarket Comparision Presentation</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/blood.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Supermarket Comparision </h2>
+					<p>by Simon Sölder &amp; Lena Ebner</p>
+					<p>Information Retrieval SS 2021 FH Salzburg</p>
+				</section>
+				<section>
+					<section>
+						<h2>Approach</h2>
+						<ol>
+							<li>Content Scrapen</li>
+							<li>Solr Server Import</li>
+							<li>React Typescript UI</li>
+						</ol>
+					</section>
+					<section> 
+						<h2>Scrapen</h2>
+					</section>
+					<section> 
+						<h2>Solr Import</h2>
+					</section>
+					<section> 
+						<h2>React UI</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Setup</h2>
+					</section>
+					<section>
+						<p>Solr Server auf VM</p>
+					</section>
+					<section>
+						<p>Cronjob for scraping and importing </p>
+					</section>
+					<section>
+						<p>React App also deployed on VM</p>
+					</section>
+				</section>
+				<section>
+					<h2>Live Demo</h2>
+					<p></p>
+					<p>Are you hungry?</p>
+				</section>
+				<section>
+					<p>Thanks for listening :)</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				autoAnimateEasing: 'ease-in',
+				autoAnimateDuration: 0.5,
+				autoAnimateUnmatched: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
