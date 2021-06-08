@@ -20,7 +20,7 @@ const Product = ({
     <div className={styles.productBox}>
       <span className={styles.title}>{title}</span>
       <div className={styles.imageWrapper}>
-        <img src={image} alt="" />
+        <img src={!!image ? image : "https://cdn3.iconfinder.com/data/icons/e-face/128/_Face_Savoring_Food-256.png" } alt={title} />
       </div>
       <span className={styles.supermarket}>{supermarket}</span>
       <span className={styles.quantity}>{quantity}</span>
