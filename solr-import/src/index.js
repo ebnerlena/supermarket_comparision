@@ -15,6 +15,7 @@ const buildDocument = (product) => {
   document[QUANTITY_FIELD] = product.quantity;
   document[PRICE_FIELD] = product.price;
   document[IMAGE_FIELD] = product.image;
+  document[SUPERMARKET_FIELD] = product.supermarket;
 
   return document;
 };
