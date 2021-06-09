@@ -28,7 +28,7 @@ jobs:
          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
      - name: Adding Known Hosts
-       run: ssh-keyscan -p 5412 -H {% raw %}${{ secrets.SSH_HOST }}{% endraw%} >> ~/.ssh/known_hosts
+       run: ssh-keyscan -p 5412 vm-cyan.multimediatechnology.at >> ~/.ssh/known_hosts
 
      - name: RSync Repo
-       run: rsync -avz ./ {% raw %}${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}{% endraw %}:/var/www/supermarket_comparision/
+       run: rsync -avz ./ deploy@vm-cyan.multimediatechnology.at:/var/www/supermarket_comparision/
