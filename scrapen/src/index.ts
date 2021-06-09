@@ -13,7 +13,7 @@ interface Product {
   supermarket: string;
 }
 
-const data: Product[] = {} as Product[];
+const data: Product[] = [];
 let productCnt = 0;
 
 const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
@@ -95,14 +95,14 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
   const productsOffset = productCnt;
   allProducts.forEach((product, index) => {
     if (product) {
-      data[productsOffset + index] = {
+      data.push({
         id: productsOffset + index,
         title: product.title,
         price: product.price,
         supermarket: supermarketLabel,
         quantity: product.quantity,
         image: product.image,
-      };
+      });
       productCnt++;
     }
   });
