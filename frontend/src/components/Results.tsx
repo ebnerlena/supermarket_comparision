@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../assets/Results.module.scss"
 import Product from "./Product"
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux"
-import { IResponseDoc, ISuggestionDoc } from "../types/query-types"
+import { IProduct, ISuggestionDoc } from "../types/query-types"
 import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
 import { QueryDataType } from "../types/query-types"
 
@@ -42,13 +42,14 @@ const Results = ({
             <div className={styles.sortWrapper}>SORT BY</div>
           </section>
           <section className={styles.productsWrapper}>
-            {resultProducts.map((prod: IResponseDoc) => (
+            {resultProducts.map((prod: IProduct) => (
               <Product
                 title={prod.title_t_sort}
                 price={prod.price_f}
                 quantity={prod.quantity_txt_de}
                 image={prod.image_url_t}
                 supermarket={prod.supermarket_t_sort}
+                highlightString={prod.highlightString}
                 key={prod.id}
               />
             ))}

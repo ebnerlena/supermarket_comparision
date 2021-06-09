@@ -1,5 +1,5 @@
 import { ActionCreator, Dispatch } from "redux"
-import { IResponseDoc } from "../../types/query-types"
+import { IProduct, IResponseDoc } from "../../types/query-types"
 import { QueryDataType } from "../../types/query-types"
 
 export const queryActionCreator: ActionCreator<void> =
@@ -21,19 +21,26 @@ export const queryActionCreator: ActionCreator<void> =
       body: JSON.stringify(postData),
     }).then((res) => res.json())
 
-    const docsWithHighlights = queryResult.response.docs
+    const products: IProduct[] = []
 
     if (queryResult.response.numFound > 0) {
-      docsWithHighlights.map((doc: IResponseDoc) => {
-        return {
+      queryResult.response.docs.forEach((doc: IResponseDoc) => {
+        const highlighting = queryResult.highlighting[doc.id]
+        const highlightString =
+          `<span>${highlighting.title_t_sort || ""} ${
+            highlighting.quantity_t_de || ""
+          } ${highlighting.supermarket_t_sort || ""}</span>` || ""
+
+        products.push({
           ...doc,
-          highlighting: queryResult.highlighting[doc.id],
-        }
+          highlighting: highlighting,
+          highlightString: highlightString,
+        })
       })
     }
     const resultPayload = {
       query: queryResult,
-      products: docsWithHighlights,
+      products: products,
     }
 
     dispatch({ type: "query/initiated", payload: {} })
