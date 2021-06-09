@@ -30,7 +30,7 @@ jobs:
      - name: Adding Known Hosts
        run: ssh-keyscan -p 5412 vm-cyan.multimediatechnology.at >> ~/.ssh/known_hosts
      - name: Test
-       run: pwd
+       run: pwd | ls -la ../
 
      - name: RSync Repo
        run: rsync -avz -e "ssh -p 5412" ./ deploy@vm-cyan.multimediatechnology.at:/var/www/supermarket_comparision/
