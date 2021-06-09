@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
-import { chromium } from "playwright";
 import { writeFileSync } from "fs";
+import { chromium } from "playwright";
 import supermarkets from "./supermarkets/index";
 import { Selectors } from "./type";
 
@@ -62,7 +62,7 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         text = price?.innerText
           .trim()
           .replace(/\g+|\,/, ".")
-          .replace(/\€+|\-/, "");
+          .replace(/[€+\-]/g, "");
         nr = text ? parseFloat(text) : 0;
         singleProduct.price = nr;
 
@@ -81,7 +81,7 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         }
 
         const image = product.querySelector(supermarketSelector.images);
-        singleProduct.image = image?.src ? image?.src : "";
+        singleProduct.image = image?.src ? image.src : "";
 
         return singleProduct;
       });
