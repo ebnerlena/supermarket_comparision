@@ -11,7 +11,7 @@ export const clearProductsActionCreator: ActionCreator<void> =
     } catch (error) {
       dispatch({
         type: "clearProducts/error",
-        payload: null,
+        payload: error,
       })
     }
   }

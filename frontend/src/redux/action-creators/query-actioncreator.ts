@@ -1,5 +1,5 @@
 import { ActionCreator, Dispatch } from "redux"
-import { IResponseDoc, IProduct } from "../../types/query-types"
+import { IResponseDoc } from "../../types/query-types"
 import { QueryDataType } from "../../types/query-types"
 
 export const queryActionCreator: ActionCreator<void> =
