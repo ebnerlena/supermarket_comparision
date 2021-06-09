@@ -43,6 +43,7 @@ const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
 
   const handleSwitch = (checked: boolean) => {
     setSwitchStatus(checked)
+    setSupermarket("")
   }
 
   return (
@@ -68,8 +69,9 @@ const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
             onChange={(e) => setSupermarket(e.target.value)}
           >
             <option value="lidl">Lidl</option>
-            <option value="billa">Billa</option>
-            <option value="interspar">Interspar</option>
+            <option value="hofer">Hofer</option>
+            <option value="penny">Penny</option>
+            <option value="spar">Interspar</option>
           </select>
           <input
             type="range"
