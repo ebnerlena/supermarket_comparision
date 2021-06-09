@@ -1,4 +1,5 @@
 import { ActionCreator, Dispatch } from "redux"
+import { IResponseDoc, IProduct } from "../../types/query-types"
 import { QueryDataType } from "../../types/query-types"
 
 export const queryActionCreator: ActionCreator<void> =
@@ -12,7 +13,7 @@ export const queryActionCreator: ActionCreator<void> =
         : "",
     }
 
-    const result = await fetch(queryUrl, {
+    const queryResult = await fetch(queryUrl, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -20,11 +21,26 @@ export const queryActionCreator: ActionCreator<void> =
       body: JSON.stringify(postData),
     }).then((res) => res.json())
 
+    const docsWithHighlights = queryResult.response.docs
+
+    if (queryResult.response.numFound > 0) {
+      docsWithHighlights.map((doc: IResponseDoc) => {
+        return {
+          ...doc,
+          highlighting: queryResult.highlighting[doc.id],
+        }
+      })
+    }
+    const resultPayload = {
+      query: queryResult,
+      products: docsWithHighlights,
+    }
+
     dispatch({ type: "query/initiated", payload: {} })
     try {
       dispatch({
         type: "query/success",
-        payload: result,
+        payload: resultPayload,
       })
     } catch (error) {
       dispatch({

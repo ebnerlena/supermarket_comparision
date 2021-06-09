@@ -3,11 +3,12 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Switch from "react-switch"
 import styles from "../assets/Form.module.scss"
+import { clearProductsActionCreator } from "../redux/action-creators/clear-actioncreator"
 import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
 import { QueryDataType } from "../types/query-types"
 
 type FormPropsType = {
-  searchQuery: string,
+  searchQuery: string
   setSearchQuery: (query: string) => void
 }
 
@@ -34,6 +35,7 @@ const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
       priceRange: priceRange,
       supermarket: supermarket,
     }
+    dispatch(clearProductsActionCreator())
     dispatch(queryActionCreator(queryData))
 
     console.log(searchQuery)
