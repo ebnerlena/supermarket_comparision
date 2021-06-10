@@ -5,31 +5,27 @@ import { RootStateOrAny, useSelector, useDispatch } from "react-redux"
 import { IProduct, ISuggestionDoc } from "../types/query-types"
 import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
 import { QueryDataType } from "../types/query-types"
+import { setFormDataActionCreator } from "../redux/action-creators/form-actioncreator"
 
-type ResultsPropsType = {
-  searchQuery: string
-  setSearchQuery: (query: string) => void
-}
-
-const Results = ({
-  searchQuery,
-  setSearchQuery,
-}: ResultsPropsType): JSX.Element => {
+const Results = (): JSX.Element => {
   const resultProducts =
     useSelector((state: RootStateOrAny) => state.products) || []
 
   const spellCheckData =
     useSelector((state: RootStateOrAny) => state.query.spellcheck) || {}
 
+  const formData = useSelector((state: RootStateOrAny) => state.formData)
+
   const dispatch = useDispatch()
 
   const handleSuggestionClicked = (searchText: string) => {
     const queryData: QueryDataType = {
       searchText: searchText,
-      priceRange: "",
-      supermarket: "",
+      priceRange: formData.priceRange,
+      supermarket: formData.supermarket,
+      sorting: formData.sorting,
     }
-    setSearchQuery(searchText)
+    dispatch(setFormDataActionCreator(queryData))
     dispatch(queryActionCreator(queryData))
   }
 
@@ -59,7 +55,7 @@ const Results = ({
         <div className={styles.suggestionsWrapper}>
           <h3>
             Unfortunately there are no results according your search for{" "}
-            <span>{searchQuery}</span>...
+            <span>{formData.searchQuery}</span>...
           </h3>
           <h4>Maybe you want to try: </h4>
           <ul className={styles.suggestionsList}>

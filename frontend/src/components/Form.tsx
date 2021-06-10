@@ -4,18 +4,16 @@ import { useDispatch } from "react-redux"
 import Switch from "react-switch"
 import styles from "../assets/Form.module.scss"
 import { clearProductsActionCreator } from "../redux/action-creators/clear-actioncreator"
+import { setFormDataActionCreator } from "../redux/action-creators/form-actioncreator"
 import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
 import { QueryDataType } from "../types/query-types"
 
-type FormPropsType = {
-  searchQuery: string
-  setSearchQuery: (query: string) => void
-}
-
-const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
+const Form = (): JSX.Element => {
   const dispatch = useDispatch()
   const [priceRange, setPriceRange] = useState("")
   const [supermarket, setSupermarket] = useState("")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [sorting, setSorting] = useState("relevance")
   const [switchStatus, setSwitchStatus] = useState(false)
 
   //For Debugging/Styling
@@ -34,8 +32,10 @@ const Form = ({ searchQuery, setSearchQuery }: FormPropsType): JSX.Element => {
       searchText: searchQuery,
       priceRange: priceRange,
       supermarket: supermarket,
+      sorting: sorting,
     }
     dispatch(clearProductsActionCreator())
+    dispatch(setFormDataActionCreator(queryData))
     dispatch(queryActionCreator(queryData))
 
     console.log(searchQuery)
