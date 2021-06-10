@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import styles from "../assets/Results.module.scss"
-import Product from "./Product"
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux"
-import { IProduct, ISuggestionDoc } from "../types/query-types"
-import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
-import { QueryDataType } from "../types/query-types"
-import { setFormDataActionCreator } from "../redux/action-creators/form-actioncreator"
+import React from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux"
+import styles from "../assets/Results.module.scss"
+import { clearProductsActionCreator } from "../redux/action-creators/clear-actioncreator"
+import { setFormDataActionCreator } from "../redux/action-creators/form-actioncreator"
+import { queryActionCreator } from "../redux/action-creators/query-actioncreator"
+import { IProduct, ISuggestionDoc, QueryDataType } from "../types/query-types"
+import Product from "./Product"
 
 const Results = (): JSX.Element => {
   const resultProducts =
@@ -43,13 +43,65 @@ const Results = (): JSX.Element => {
     )
   }
 
+  const handleSortTypeChange = (sortType: string) => {
+    dispatch(clearProductsActionCreator())
+
+    const queryData = {
+      ...formData,
+      startIndex: 0,
+      sorting: {
+        ...formData.sorting,
+        sortType: sortType,
+      },
+    }
+
+    dispatch(setFormDataActionCreator(queryData))
+    dispatch(queryActionCreator(queryData))
+  }
+
+  const handleSortOrderChange = (sortOrder: string) => {
+    dispatch(clearProductsActionCreator())
+
+    const queryData = {
+      ...formData,
+      startIndex: 0,
+      sorting: {
+        ...formData.sorting,
+        sortOrder: sortOrder,
+      },
+    }
+
+    dispatch(setFormDataActionCreator(queryData))
+    dispatch(queryActionCreator(queryData))
+  }
+
   return (
     <div className={styles.resultsWrapper}>
       {resultProducts.length > 0 ? (
         <>
           <section className={styles.resultsMenu}>
             <span>{`${queryData.response.numFound} results`} </span>
-            <div className={styles.sortWrapper}>SORT BY</div>
+            <div className={styles.sortWrapper}>
+              <select
+                id="sortType"
+                name="sortType"
+                value={formData.sorting.sortType}
+                onChange={(e) => handleSortTypeChange(e.target.value)}
+              >
+                <option value="score">score</option>
+                <option value="title_t_sort">alphabetical</option>
+                <option value="price_f">price</option>
+              </select>
+              <select
+                id="sortOrder"
+                name="sortOrder"
+                value={formData.sorting.sortOrder}
+                onChange={(e) => handleSortOrderChange(e.target.value)}
+              >
+                <option value="desc">desc</option>
+                <option value="asc">asc</option>
+              </select>
+            </div>
           </section>
           <section className={styles.productsWrapper}>
             <InfiniteScroll

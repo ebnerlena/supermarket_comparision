@@ -13,7 +13,10 @@ const Form = (): JSX.Element => {
   const [priceRange, setPriceRange] = useState("")
   const [supermarket, setSupermarket] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
-  const [sorting, setSorting] = useState("relevance")
+  const [sorting, setSorting] = useState({
+    sortType: "score",
+    sortOrder: "desc",
+  })
   const [switchStatus, setSwitchStatus] = useState(false)
 
   const handleSubmit = (event: FormEvent) => {
