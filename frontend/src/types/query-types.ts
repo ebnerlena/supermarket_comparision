@@ -1,6 +1,5 @@
 export type QueryDataType = {
   searchText: string
-  priceRange: string
   supermarket: string
   sorting: ISortingType
   startIndex: number

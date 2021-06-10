@@ -10,22 +10,19 @@ import { QueryDataType } from "../types/query-types"
 
 const Form = (): JSX.Element => {
   const dispatch = useDispatch()
-  const [priceRange, setPriceRange] = useState("")
   const [supermarket, setSupermarket] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
-  const [sorting, setSorting] = useState({
-    sortType: "score",
-    sortOrder: "desc",
-  })
   const [switchStatus, setSwitchStatus] = useState(false)
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     const queryData: QueryDataType = {
       searchText: searchQuery,
-      priceRange: priceRange,
       supermarket: supermarket,
-      sorting: sorting,
+      sorting: {
+        sortType: "score",
+        sortOrder: "desc",
+      },
       startIndex: 0,
     }
     dispatch(clearProductsActionCreator())
@@ -65,14 +62,6 @@ const Form = (): JSX.Element => {
             <option value="penny">Penny</option>
             <option value="spar">Interspar</option>
           </select>
-          <input
-            type="range"
-            name="pricerange"
-            min="1"
-            max="100"
-            value={priceRange}
-            onChange={(e) => setPriceRange(e.target.value)}
-          />
         </div>
       ) : (
         <></>
