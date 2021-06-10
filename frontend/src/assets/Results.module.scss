@@ -27,6 +27,14 @@
   align-items: flex-start !important;
   flex-wrap: wrap !important;
 }
+.scrollingText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 325px;
+  width: 444px;
+  font-size: 1.3rem;
+}
 
 .suggestionsWrapper {
   padding: 2rem;

@@ -62,9 +62,9 @@ const Results = (): JSX.Element => {
               }
               loader={<h4>Loading...</h4>}
               endMessage={
-                <p style={{ textAlign: "center" }}>
+                <div className={styles.scrollingText}>
                   <b>Yay! You have seen it all</b>
-                </p>
+                </div>
               }
             >
               {resultProducts.map((prod: IProduct) => (
