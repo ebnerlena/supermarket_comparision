@@ -48,7 +48,7 @@ const deleteAll = async () => {
 };
 
 const addDocument = async (fields) => {
-  await postSolrRequest("update?overwrite=true&commitWithin=1000", [
+  await postSolrRequest("update?overwrite=true&commitWithin=2000", [
     { ...fields },
   ]);
 };
