@@ -1,0 +1,61 @@
+@import "variables.scss";
+
+.form {
+  width: 100%;
+  background-color: $charcoal;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: auto;
+  font-family: "Montserrat";
+  // display: grid;
+  // grid-template-rows: 1fr auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .normalWrapper {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .advancedWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  label {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      margin-right: 1rem;
+    }
+  }
+
+  input[type="text"]:focus {
+    border: 3px solid $copper-red;
+  }
+
+  input[type="text"] {
+    border-radius: 10px;
+    border: 3px solid transparent;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+  }
+
+  input[type="submit"] {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+  }
+
+  select {
+    font-size: 1.1rem;
+    padding: 0.1rem 0.4rem;
+  }
+}

@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import products from "./../../scrapen/public/products.json";
 
 export const TITLE_FIELD = "title_t_sort";
-export const QUANTITY_FIELD = "quantity_txt_de";
+export const QUANTITY_FIELD = "quantity_t_de";
 export const PRICE_FIELD = "price_f";
 export const IMAGE_FIELD = "image_url_t";
 export const SUPERMARKET_FIELD = "supermarket_t_sort";

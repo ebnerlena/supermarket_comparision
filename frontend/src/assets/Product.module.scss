@@ -1,0 +1,88 @@
+@import "variables.scss";
+.productBox {
+  background-color: $tuscan-red;
+  border-radius: 10px;
+  height: 385px;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  min-width: 400px;
+  transition: 0.2s ease-in-out all;
+  display: grid;
+  filter: brightness(0.9);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 80px 200px 55px 50px;
+  grid-template-areas:
+    "name name name"
+    "image image image"
+    "highlighting highlighting highlighting"
+    "supermarket quantity price";
+
+  &:hover {
+    filter: brightness(1);
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    grid-area: name;
+    white-space: normal;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: $charcoal;
+  }
+
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: image;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: quantity;
+    background-color: $prussian-blue;
+  }
+
+  .price {
+    display: flex;
+    background-color: $prussian-blue;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: price;
+    font-size: 1.3rem;
+    font-family: "Fredoka One";
+    padding-right: 1rem;
+  }
+
+  .supermarket {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-area: supermarket;
+    padding-left: 1rem;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    background-color: $prussian-blue;
+  }
+
+  .highlighting {
+    grid-area: highlighting;
+    background-color: $charcoal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+  }
+}

@@ -1,0 +1,77 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+.resultsWrapper {
+  width: 100%;
+
+  .resultsMenu {
+    width: 100%;
+    background-color: $background;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      font-size: 1.4rem;
+      padding: 1rem;
+    }
+
+    .sortWrapper {
+      padding: 1rem;
+    }
+  }
+}
+.infinite_scroll_component {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0rem 2rem 2rem 2rem !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+.scrollingText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 325px;
+  width: 444px;
+  font-size: 1.3rem;
+}
+
+.suggestionsWrapper {
+  padding: 2rem;
+
+  .suggestionsList {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .suggestionLink {
+    background-color: $tuscan-red;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    transition: all 0.3s ease;
+  }
+
+  .suggestionLink:hover {
+    cursor: pointer;
+    transform: scale(1.07);
+  }
+
+  span {
+    text-transform: uppercase;
+    font-style: italic;
+  }
+}
