@@ -33,14 +33,11 @@ const Form = (): JSX.Element => {
       priceRange: priceRange,
       supermarket: supermarket,
       sorting: sorting,
+      startIndex: 0,
     }
     dispatch(clearProductsActionCreator())
     dispatch(setFormDataActionCreator(queryData))
     dispatch(queryActionCreator(queryData))
-
-    console.log(searchQuery)
-    console.log(priceRange)
-    console.log(supermarket)
   }
 
   const handleSwitch = (checked: boolean) => {

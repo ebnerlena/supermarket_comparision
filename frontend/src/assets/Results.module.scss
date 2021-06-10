@@ -19,14 +19,13 @@
       padding: 1rem;
     }
   }
-
-  .productsWrapper {
-    display: flex;
-    padding-bottom: 2rem;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
+}
+.infinite_scroll_component {
+  display: flex !important;
+  padding-bottom: 2rem !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
 }
 
 .suggestionsWrapper {

@@ -11,6 +11,7 @@ export const queryActionCreator: ActionCreator<void> =
       filter: !!queryData.supermarket
         ? `supermarket_t_sort:${queryData.supermarket}`
         : "",
+      offset: queryData.startIndex,
     }
 
     const queryResult = await fetch(queryUrl, {
