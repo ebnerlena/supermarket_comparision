@@ -25,6 +25,7 @@
     border-radius: 10px 10px 0 0;
     grid-area: name;
     white-space: normal;
+    text-align: center;
     font-weight: bold;
     font-size: 1.3rem;
     padding-left: 1rem;
@@ -78,6 +79,7 @@
   .highlighting {
     grid-area: highlighting;
     background-color: $charcoal;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
