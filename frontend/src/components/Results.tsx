@@ -9,8 +9,6 @@ import { setFormDataActionCreator } from "../redux/action-creators/form-actioncr
 import InfiniteScroll from "react-infinite-scroll-component"
 
 const Results = (): JSX.Element => {
-  const [startIndex, setStartIndex] = useState(0)
-
   const resultProducts =
     useSelector((state: RootStateOrAny) => state.products) || []
 
@@ -21,24 +19,26 @@ const Results = (): JSX.Element => {
   const dispatch = useDispatch()
 
   const handleSuggestionClicked = (searchText: string) => {
-    setStartIndex(0)
     const queryData: QueryDataType = {
+      ...formData,
       searchText: searchText,
-      priceRange: formData.priceRange,
-      supermarket: formData.supermarket,
-      sorting: formData.sorting,
-      startIndex: startIndex,
+      startIndex: 0,
     }
     dispatch(setFormDataActionCreator(queryData))
     dispatch(queryActionCreator(queryData))
   }
 
   const handleRefetch = () => {
-    setStartIndex(startIndex + 15)
+    dispatch(
+      setFormDataActionCreator({
+        ...formData,
+        startIndex: formData.startIndex + 15,
+      })
+    )
     dispatch(
       queryActionCreator({
         ...formData,
-        startIndex: startIndex,
+        startIndex: formData.startIndex + 15,
       })
     )
   }
@@ -53,10 +53,13 @@ const Results = (): JSX.Element => {
           </section>
           <section className={styles.productsWrapper}>
             <InfiniteScroll
-              dataLength={resultProducts.length} //This is important field to render the next data
+              dataLength={resultProducts.length}
               className={styles.infinite_scroll_component}
               next={() => handleRefetch()}
-              hasMore={true}
+              hasMore={
+                queryData.response.numFound >= formData.startIndex &&
+                queryData.response.numFound > 15
+              }
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
@@ -82,7 +85,7 @@ const Results = (): JSX.Element => {
         <div className={styles.suggestionsWrapper}>
           <h3>
             Unfortunately there are no results according your search for{" "}
-            <span>{formData.searchQuery}</span>...
+            <span>{formData.searchText}</span>...
           </h3>
           <h4>Maybe you want to try: </h4>
           <ul className={styles.suggestionsList}>

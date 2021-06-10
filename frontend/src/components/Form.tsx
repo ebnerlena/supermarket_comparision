@@ -16,16 +16,6 @@ const Form = (): JSX.Element => {
   const [sorting, setSorting] = useState("relevance")
   const [switchStatus, setSwitchStatus] = useState(false)
 
-  //For Debugging/Styling
-  /* useEffect(() => {
-   *   const queryData: QueryDataType = {
-   *     searchText: "Karotten",
-   *     priceRange: "",
-   *     supermarket: "",
-   *   }
-   *   dispatch(queryActionCreator(queryData))
-   * }) */
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     const queryData: QueryDataType = {
