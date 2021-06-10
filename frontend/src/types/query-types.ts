@@ -2,6 +2,8 @@ export type QueryDataType = {
   searchText: string
   priceRange: string
   supermarket: string
+  sorting: string
+  startIndex: number
 }
 
 export type IResponseDoc = {

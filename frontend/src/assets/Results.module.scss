@@ -19,14 +19,21 @@
       padding: 1rem;
     }
   }
-
-  .productsWrapper {
-    display: flex;
-    padding-bottom: 2rem;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
+}
+.infinite_scroll_component {
+  display: flex !important;
+  padding-bottom: 2rem !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+}
+.scrollingText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 325px;
+  width: 444px;
+  font-size: 1.3rem;
 }
 
 .suggestionsWrapper {
