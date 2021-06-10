@@ -22,6 +22,12 @@
 					<p>Information Retrieval SS 2021 FH Salzburg</p>
 				</section>
 				<section>
+					<img class="r-stretch" src="./images/supermarket_comparision.jpg">
+				</section>
+				<section>
+					<img src="./images/github-repo.jpg">
+				</section>
+				<section>
 					<section>
 						<h2>Approach</h2>
 						<ol>
@@ -179,6 +185,17 @@
 					<section> 
 						<h2>React UI</h2>
 					</section>
+					<section>
+						<div>
+							<img class="fragment" src="./images/react-with-typescript.png" width="450" height="auto">
+							<img class="fragment" src="./images/react-redux.jpg" width="450" height="auto">
+							<img class="fragment" src="./images/sass.png" width="250" height="auto">
+							<img class="fragment" src="./images/react-infinitve-scrolling.jpg" width="550" height="auto">
+						</div>
+					</section>
+					<section>
+						<img src="./images/frontend.jpg">
+					</section>
 				</section>
 				<section>
 					<section>
@@ -190,11 +207,23 @@
 							jobs:
 								build:
 									runs-on: ubuntu-latest
+									defaults:
+									run:
+										working-directory: ./frontend
 									steps:
-									- uses: actions/checkout@v2
+									- name: Checking out repo
+										uses: actions/checkout@v1
+									- name: Use node.js
+										uses: actions/setup-node@v1
+										with:
+										node-version: "15"
+									- name: Installing packages
+										run: npm i
+									- name: Building create-react-app
+										run: npm run build
 									- name: RSync Deployment
-									uses: burnett01/rsync-deployments@4.1
-									with:
+										uses: burnett01/rsync-deployments@4.1
+										with:
 										switches: -avzr --delete --exclude="" --include="" --filter=""
 										path: ./
 										remote_path: /var/www/supermarket_comparision/
@@ -205,13 +234,13 @@
 						</code></pre>
 					</section>
 					<section>
-						<p>Solr Server on VM</p>
+						<p>Solr Server & App on VM</p>
+					</section>
+					<section>
+						<img src="./images/vhost-config.png" >
 					</section>
 					<section>
 						<p>Cronjob for scraping and importing</p>
-					</section>
-					<section>
-						<p>React App also on VM</p>
 					</section>
 				</section>
 				<section>

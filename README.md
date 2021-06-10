@@ -29,6 +29,10 @@
 - ui: `npm run start-ui`
 - presentation: `npm run start-presentation`
 
+## Deployed App
+
+- https://vm-cyan.multimediatechnology.at/
+
 ## Team Members
 
 - Simon Sölder
