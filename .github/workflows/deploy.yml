@@ -15,18 +15,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - uses: actions/checkout@v1
       - name: create-react-app build
         uses: actions/setup-node@v1
       - name: Installing packages
         run: npm i
-        working-directory: frontend
       - name: Building create-react-app
         run: npm run build
-        working-directory: frontend
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: RSync Deployment
