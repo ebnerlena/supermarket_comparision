@@ -1,12 +1,8 @@
 @import "variables.scss";
+@import "mixins.scss";
 .productBox {
   background-color: $tuscan-red;
   border-radius: 10px;
-  height: 385px;
-  margin-top: 2rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  min-width: 400px;
   transition: 0.2s ease-in-out all;
   display: grid;
   filter: brightness(0.9);
@@ -29,6 +25,7 @@
     border-radius: 10px 10px 0 0;
     grid-area: name;
     white-space: normal;
+    text-align: center;
     font-weight: bold;
     font-size: 1.3rem;
     padding-left: 1rem;
@@ -64,6 +61,7 @@
     font-size: 1.3rem;
     font-family: "Fredoka One";
     padding-right: 1rem;
+    border-radius: 0 0 10px 0;
   }
 
   .supermarket {
@@ -75,11 +73,13 @@
     text-transform: uppercase;
     font-size: 1.3rem;
     background-color: $prussian-blue;
+    border-radius: 0 0 0 10px;
   }
 
   .highlighting {
     grid-area: highlighting;
     background-color: $charcoal;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;

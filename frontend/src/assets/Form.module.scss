@@ -3,8 +3,6 @@
 .form {
   width: 100%;
   background-color: $charcoal;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   height: auto;
   font-family: "Montserrat";
   // display: grid;
@@ -12,29 +10,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .normalWrapper {
-    width: 40%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .advancedWrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+  flex-wrap: wrap;
 
   label {
+    margin-left: 2%;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
 
     span {
+      width: auto;
       margin-right: 1rem;
     }
+  }
+
+  input,
+  select {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   input[type="text"]:focus {
@@ -49,6 +43,7 @@
   }
 
   input[type="submit"] {
+    margin-left: 2%;
     border-radius: 5px;
     padding: 0.5rem 1rem;
     font-weight: bold;
@@ -56,6 +51,7 @@
 
   select {
     font-size: 1.1rem;
-    padding: 0.1rem 0.4rem;
+    margin-left: 2%;
+    padding: 0.3rem 0.4rem;
   }
 }

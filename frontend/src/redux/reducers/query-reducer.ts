@@ -1,5 +1,4 @@
 import { Reducer } from "redux"
-import { QueryDataType } from "../../types/query-types"
 const initialstate = {
   query: {},
   products: [],

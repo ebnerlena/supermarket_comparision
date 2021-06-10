@@ -10,19 +10,19 @@ import { QueryDataType } from "../types/query-types"
 
 const Form = (): JSX.Element => {
   const dispatch = useDispatch()
-  const [priceRange, setPriceRange] = useState("")
   const [supermarket, setSupermarket] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
-  const [sorting, setSorting] = useState("relevance")
   const [switchStatus, setSwitchStatus] = useState(false)
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     const queryData: QueryDataType = {
       searchText: searchQuery,
-      priceRange: priceRange,
       supermarket: supermarket,
-      sorting: sorting,
+      sorting: {
+        sortType: "score",
+        sortOrder: "desc",
+      },
       startIndex: 0,
     }
     dispatch(clearProductsActionCreator())
@@ -37,40 +37,28 @@ const Form = (): JSX.Element => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.normalWrapper}>
-        <input
-          type="text"
-          name="searchfield"
-          value={searchQuery}
-          placeholder="Enter search query..."
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <input type="submit" name="submit" value="SEARCH" />
-        <label>
-          <span>Advanced Options</span>
-          <Switch onChange={handleSwitch} checked={switchStatus} />
-        </label>
-      </div>
+      <input
+        type="text"
+        name="searchfield"
+        value={searchQuery}
+        placeholder="Enter search query..."
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <input type="submit" name="submit" value="SEARCH" />
+      <label>
+        <span>Advanced Options</span>
+        <Switch onChange={handleSwitch} checked={switchStatus} />
+      </label>
       {switchStatus ? (
-        <div className={styles.advancedWrapper}>
-          <select
-            name="supermarket"
-            onChange={(e) => setSupermarket(e.target.value)}
-          >
-            <option value="lidl">Lidl</option>
-            <option value="hofer">Hofer</option>
-            <option value="penny">Penny</option>
-            <option value="spar">Interspar</option>
-          </select>
-          <input
-            type="range"
-            name="pricerange"
-            min="1"
-            max="100"
-            value={priceRange}
-            onChange={(e) => setPriceRange(e.target.value)}
-          />
-        </div>
+        <select
+          name="supermarket"
+          onChange={(e) => setSupermarket(e.target.value)}
+        >
+          <option value="lidl">Lidl</option>
+          <option value="hofer">Hofer</option>
+          <option value="penny">Penny</option>
+          <option value="spar">Interspar</option>
+        </select>
       ) : (
         <></>
       )}
