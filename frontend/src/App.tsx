@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Header from "./components/Header"
 import "./assets/App.scss"
 import Form from "./components/Form"
