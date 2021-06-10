@@ -4,7 +4,7 @@ import { QueryDataType } from "../../types/query-types"
 
 export const queryActionCreator: ActionCreator<void> =
   (queryData: QueryDataType) => async (dispatch: Dispatch) => {
-    const queryUrl = `${process.env.REACT_APP_SOLR_URL}/${process.env.REACT_APP_SOLR_CORE}/browse`
+    const queryUrl = `https://vm-cyan.multimediatechnology.at/solr/products/browse`
 
     const postData = {
       query: queryData.searchText,
