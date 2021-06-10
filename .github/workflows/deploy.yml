@@ -21,16 +21,23 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-     - name: Install SSH KEY
-       uses: shimataro/ssh-key-action@v2
+#      - name: Install SSH KEY
+#      - uses: actions/checkout@v2
+#        with:
+#          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+#          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#      - name: Adding Known Hosts
+#        run: ssh-keyscan -p 5412 vm-cyan.multimediatechnology.at >> ~/.ssh/known_hosts
+     - uses: actions/checkout@v2
+     - name: RSync Deployment
+       uses: burnett01/rsync-deployments@4.1
        with:
-         key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-     - name: Adding Known Hosts
-       run: ssh-keyscan -p 5412 vm-cyan.multimediatechnology.at >> ~/.ssh/known_hosts
-     - name: Test
-       run: pwd | ls -la ../
-
-     - name: RSync Repo
-       run: rsync -avz -e "ssh -p 5412" ./ deploy@vm-cyan.multimediatechnology.at:/var/www/supermarket_comparision/
+         switches: -avzr --delete --exclude="" --include="" --filter=""
+         path: ./
+         remote_path: /var/www/supermarket_comparision/
+         remote_host: vm-cyan.multimediatechnology.at
+         remote_port: 4512
+         remote_user: deploy
+         remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+       # run: rsync -avz -e "ssh -p 5412" ./ deploy@vm-cyan.multimediatechnology.at:/var/www/supermarket_comparision/
