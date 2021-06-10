@@ -33,16 +33,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 0rem 2rem 2rem 2rem !important;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-  flex-wrap: wrap !important;
+  grid-gap: 30px;
 
   @include tablet {
     grid-template-columns: 1fr 1fr;
   }
 
   @include mobile {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }
 .scrollingText {
