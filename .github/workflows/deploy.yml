@@ -37,7 +37,7 @@ jobs:
          path: ./
          remote_path: /var/www/supermarket_comparision/
          remote_host: vm-cyan.multimediatechnology.at
-         remote_port: 4512
+         remote_port: 5412
          remote_user: deploy
          remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
        # run: rsync -avz -e "ssh -p 5412" ./ deploy@vm-cyan.multimediatechnology.at:/var/www/supermarket_comparision/
