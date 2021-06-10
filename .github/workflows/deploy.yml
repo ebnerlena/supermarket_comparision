@@ -19,9 +19,12 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v1
-      - name: create-react-app build
+      - name: Checking out repo
+        uses: actions/checkout@v1
+      - name: Use node.js
         uses: actions/setup-node@v1
+        with:
+          node-version: "15"
       - name: Installing packages
         run: npm i
       - name: Building create-react-app
