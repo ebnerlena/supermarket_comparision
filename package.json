@@ -1,0 +1,31 @@
+{
+  "name": "supermarket_comparision",
+  "version": "1.0.0",
+  "description": "An application to search for supermarkets products and compare their prices",
+  "main": "index.js",
+  "scripts": {
+    "start-scrapen": "cd scrapen && npm run start",
+    "start-solr-import": "cd solr-import && npm run start-node",
+    "start-ui": "cd frontent && yarn start",
+    "start-presentation": "cd presentation && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebnerlena/supermarket_comparision.git"
+  },
+  "keywords": [
+    "supermarket",
+    "typescript",
+    "prices",
+    "node",
+    "solr",
+    "search",
+    "scrapen"
+  ],
+  "author": "Lena Ebner, Simon Sölder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ebnerlena/supermarket_comparision/issues"
+  },
+  "homepage": "https://github.com/ebnerlena/supermarket_comparision#readme"
+}
