@@ -4,9 +4,9 @@ name: Deploy to VM
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -15,17 +15,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-     - uses: actions/checkout@v2
-     - name: RSync Deployment
-       uses: burnett01/rsync-deployments@4.1
-       with:
-         switches: -avzr --delete --exclude="" --include="" --filter=""
-         path: ./
-         remote_path: /var/www/supermarket_comparision/
-         remote_host: ${{ secrets.DEPLOY_HOST }}
-         remote_port: ${{ secrets.DEPLOY_PORT }}
-         remote_user: ${{ secrets.DEPLOY_USER }}
-         remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+      - uses: actions/checkout@v1
+      - name: create-react-app build
+        uses: actions/setup-node@v1
+      - name: Installing packages
+        run: npm i
+        working-directory: frontend
+      - name: Building create-react-app
+        run: npm run build
+        working-directory: frontend
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: RSync Deployment
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete --exclude="" --include="" --filter=""
+          path: ./
+          remote_path: /var/www/supermarket_comparision/
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
