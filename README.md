@@ -9,17 +9,18 @@
 
 ## Supermarkets:
 
-1. Hofer: full sortiment or only aktionen ✔️
-2. Interspar: Angebote ✔️
-3. Lidl: angebote ✔️
-4. Penny: ✔️
+1. Hofer ✔️
+2. Interspar ✔️
+3. Lidl ✔️
+4. Penny ✔️
 
 ## Approach
 
-1. Scrape Content of supermarket websites
-2. Put scraped data on onto solr server
+1. Scrape content of supermarket websites
+2. Put scraped data on onto solr server & configure solr server
 3. Build frontend to query data
 4. Deploy everything to VM
+5. Create presentation
 
 ## Usage
 

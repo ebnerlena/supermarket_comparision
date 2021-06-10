@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-scrapen": "cd scrapen && npm run start",
-    "start-solr-import": "cd solr-import && npm run start-node",
+    "start-solr-import": "cd solr-import && npm run start",
     "start-ui": "cd frontent && yarn start",
     "start-presentation": "cd presentation && npm run start"
   },
