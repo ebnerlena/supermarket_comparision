@@ -17,7 +17,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h2>Supermarket Comparision </h2>
+					<h2>Supermarket Comparision</h2>
 					<p>by Simon Sölder &amp; Lena Ebner</p>
 					<p>Information Retrieval SS 2021 FH Salzburg</p>
 				</section>
@@ -27,14 +27,154 @@
 						<ol>
 							<li>Content Scrapen</li>
 							<li>Solr Server Import</li>
+							<li>Server Configuration</li>
 							<li>React Typescript UI</li>
 						</ol>
 					</section>
 					<section> 
 						<h2>Scrapen</h2>
 					</section>
+					<section>
+						<p>Supermarket Example</p>
+						<pre><code data-trim data-noescape>
+							import { Supermarket } from "../type";
+
+							const lidlPages: string[] = [
+								"https://www.lidl.at/angebote",
+								"https://www.lidl.at/sortimente/neu-bei-lidl-oesterreich",
+							];
+
+							const lidlSelectors = {
+								titles: ".product__text .product__title",
+								quantity: ".pricebox__basic-quantity",
+								prices: ".pricebox__price",
+								images: ".product__image > picture > img",
+								product: ".product",
+							};
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							export const lidl: Supermarket = {
+								title: "lidl",
+								pages: lidlPages,
+								imagePath: "./images/lidl/",
+								selectors: lidlSelectors,
+							};
+	
+							export default lidl;
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape>
+							(async () => {
+								for (let i = 0; i < supermarkets.length; i++) {
+								  const supermarket = supermarkets[i];
+							  
+								  for (let j = 0; j < supermarket.pages.length; j++) {
+									await scrapeSupermarketPage({
+									  url: supermarket.pages[j],
+									  supermarketLabel: supermarket.title,
+									  selectors: supermarket.selectors,
+									});}
+								}
+								const finalProducts = JSON.stringify(data);
+								writeFileSync("./public/products.json", finalProducts);
+							  })();
+						</code></pre>
+
+						<pre><code data-trim data-noescape>
+							const scrapeSupermarketPage = async ({ 
+								supermarketLabel, url, selectors 
+								}) => {
+								const browser = await chromium.launch({
+								  headless: true,
+								});
+								... 
+								const allProducts = await page.$$eval( 
+									selectors.product, (products, object
+								) => { ... }
+								const titles = product.querySelectorAll(supermarketSelector.titles);
+						</code></pre>
+					</section>
 					<section> 
 						<h2>Solr Import</h2>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape>
+							const SOLR_URL 
+								= "https://vm-cyan.multimediatechnology.at/solr/products";
+
+							const buildDocument = (product) => {
+								const document = {};
+								document[TITLE_FIELD] = product.title;
+								document[QUANTITY_FIELD] = product.quantity;
+								document[PRICE_FIELD] = product.price;
+								document[IMAGE_FIELD] = product.image;
+								document[SUPERMARKET_FIELD] = product.supermarket;
+
+								return document;
+							};
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							const postSolrRequest = async (url, body) => {
+								const jsonResponse = await fetch(`${SOLR_URL}/${url}`, {
+								  method: "POST",
+								  body: JSON.stringify(body),
+								  headers: { "Content-Type": "application/json" },
+								});
+							...
+							}
+						</code></pre>
+					</section>
+					<section> 
+						<h2>Server Config</h2>
+					</section>
+					<section>
+						<p> solrconfig.xml</p>
+						<pre><code data-trim data-noescape>
+							&lt;requestHandler name=&quot;/browse&quot; class=&quot;solr.SearchHandler&quot;&gt;
+								&lt;lst name=&quot;defaults&quot;&gt;
+								  &lt;str name=&quot;echoParams&quot;&gt;explicit&lt;/str&gt;
+						   
+								  &lt;!-- Query settings --&gt;
+								  &lt;str name=&quot;defType&quot;&gt;edismax&lt;/str&gt;
+								  &lt;str name=&quot;qf&quot;&gt;
+									 title_t_sort^10 quantity_t_de^2.0 supermarket_t_sort^1.2
+								  &lt;/str&gt;
+								  &lt;str name=&quot;mm&quot;&gt;100%&lt;/str&gt;
+								  &lt;str name=&quot;q.alt&quot;&gt;*:*&lt;/str&gt;
+								  &lt;str name=&quot;rows&quot;&gt;15&lt;/str&gt;
+								  &lt;str name=&quot;fl&quot;&gt;*,score&lt;/str&gt;
+						   
+								  &lt;str name=&quot;mlt.qf&quot;&gt;
+									title_t_sort^10 quantity_txt_de^2.0 supermarket_t_sort^1.2
+								  &lt;/str&gt;
+								  &lt;str name=&quot;mlt.fl&quot;&gt;title_t_sort,quantity_t_de,supermarket_t_sort,price_f,id&lt;/str&gt;
+								  &lt;int name=&quot;mlt.count&quot;&gt;3&lt;/int&gt;
+						   
+								  &lt;!-- Faceting defaults --&gt;
+								  &lt;str name=&quot;facet&quot;&gt;on&lt;/str&gt;
+								  ...
+							 
+						   
+								  &lt;!-- Highlighting defaults --&gt;
+								  &lt;str name=&quot;hl&quot;&gt;on&lt;/str&gt;
+								  &lt;str name=&quot;hl.fl&quot;&gt;title_t_sort quantity_t_de supermarket_t_sort&lt;/str&gt;
+								  &lt;str name=&quot;hl.preserveMulti&quot;&gt;true&lt;/str&gt;
+								  &lt;str name=&quot;hl.encoder&quot;&gt;html&lt;/str&gt;
+								  &lt;str name=&quot;hl.simple.pre&quot;&gt;&amp;lt;b&amp;gt;&lt;/str&gt;
+								  &lt;str name=&quot;hl.simple.post&quot;&gt;&amp;lt;/b&amp;gt;&lt;/str&gt;
+						   
+								  &lt;!-- Spell checking defaults --&gt;
+								  &lt;str name=&quot;spellcheck&quot;&gt;on&lt;/str&gt;
+								  ...
+								&lt;/lst&gt;
+						   
+								&lt;!-- append spellchecking to our list of components --&gt;
+								&lt;arr name=&quot;last-components&quot;&gt;
+								  &lt;str&gt;spellcheck&lt;/str&gt;
+								&lt;/arr&gt;
+							 &lt;/requestHandler&gt;
+						</code></pre>
 					</section>
 					<section> 
 						<h2>React UI</h2>
@@ -42,16 +182,36 @@
 				</section>
 				<section>
 					<section>
-						<h2>Setup</h2>
+						<h2>Deployment</h2>
 					</section>
 					<section>
-						<p>Solr Server auf VM</p>
+						<p>Deployment with Github Actions</p>
+						<pre><code data-trim data-noescape>
+							jobs:
+								build:
+									runs-on: ubuntu-latest
+									steps:
+									- uses: actions/checkout@v2
+									- name: RSync Deployment
+									uses: burnett01/rsync-deployments@4.1
+									with:
+										switches: -avzr --delete --exclude="" --include="" --filter=""
+										path: ./
+										remote_path: /var/www/supermarket_comparision/
+										remote_host: ${{ secrets.DEPLOY_HOST }}
+										remote_port: ${{ secrets.DEPLOY_PORT }}
+										remote_user: ${{ secrets.DEPLOY_USER }}
+										remote_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+						</code></pre>
 					</section>
 					<section>
-						<p>Cronjob for scraping and importing </p>
+						<p>Solr Server on VM</p>
 					</section>
 					<section>
-						<p>React App also deployed on VM</p>
+						<p>Cronjob for scraping and importing</p>
+					</section>
+					<section>
+						<p>React App also on VM</p>
 					</section>
 				</section>
 				<section>
