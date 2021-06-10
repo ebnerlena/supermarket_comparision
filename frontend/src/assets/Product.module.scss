@@ -2,15 +2,16 @@
 .productBox {
   background-color: $tuscan-red;
   border-radius: 10px;
-  height: 325px;
+  height: 385px;
   margin-top: 2rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   min-width: 400px;
   transition: 0.2s ease-in-out all;
   display: grid;
   filter: brightness(0.9);
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50px 200px 25px 50px;
+  grid-template-rows: 80px 200px 55px 50px;
   grid-template-areas:
     "name name name"
     "image image image"
@@ -27,7 +28,7 @@
     align-items: center;
     border-radius: 10px 10px 0 0;
     grid-area: name;
-    white-space: nowrap;
+    white-space: normal;
     font-weight: bold;
     font-size: 1.3rem;
     padding-left: 1rem;
@@ -82,5 +83,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.5rem;
   }
 }

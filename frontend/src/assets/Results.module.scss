@@ -1,4 +1,5 @@
 @import "variables.scss";
+@import "mixins.scss";
 
 .resultsWrapper {
   width: 100%;
@@ -21,11 +22,20 @@
   }
 }
 .infinite_scroll_component {
-  display: flex !important;
-  padding-bottom: 2rem !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0rem 2rem 2rem 2rem !important;
   justify-content: flex-start !important;
   align-items: flex-start !important;
   flex-wrap: wrap !important;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 .scrollingText {
   display: flex;
