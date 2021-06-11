@@ -57,13 +57,19 @@ const scrapeSupermarketPage = async ({ supermarketLabel, url, selectors }) => {
         // for hofer site - for filialfinder and flugblätter item
         if (singleProduct.title === "") return;
 
-        const price = product.querySelector(supermarketSelector.prices);
         let nr: number;
-        text = price?.innerText
-          .trim()
-          .replace(/\g+|\,/, ".")
-          .replace(/[€+\-]/g, "");
-        nr = text ? parseFloat(text) : 0;
+        if (object.supermarketLabel === "spar") {
+          const price = product.querySelectorAll(supermarketSelector.prices);
+          nr = parseFloat(price[0].innerText.replace(" ", "."));
+        } else {
+          const price = product.querySelector(supermarketSelector.prices);
+          text = price?.innerText
+            .trim()
+            .replace(/\g+|\,/, ".")
+            .replace(/[€+\-]/g, "");
+          nr = text ? parseFloat(text) : 0;
+        }
+
         singleProduct.price = nr;
 
         if (object.supermarketLabel === "hofer") {
