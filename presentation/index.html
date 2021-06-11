@@ -70,12 +70,16 @@
 						</code></pre>
 					</section>
 					<section>
+						<img src="./images/lidl-neu-im-sortiment.png">
+					</section>
+					<section>
+						<p>Iterate over all supermarkets and pages</p>
 						<pre><code data-trim data-noescape>
 							(async () => {
-								for (let i = 0; i < supermarkets.length; i++) {
+								for (let i = 0; i &lt;supermarkets.length; i++) {
 								  const supermarket = supermarkets[i];
 							  
-								  for (let j = 0; j < supermarket.pages.length; j++) {
+								  for (let j = 0; j &lt;supermarket.pages.length; j++) {
 									await scrapeSupermarketPage({
 									  url: supermarket.pages[j],
 									  supermarketLabel: supermarket.title,
@@ -86,7 +90,9 @@
 								writeFileSync("./public/products.json", finalProducts);
 							  })();
 						</code></pre>
-
+						</section>
+						<section>
+							<p>Start a Headless Browser with <a href="https://playwright.dev/">Playwright</a></p>
 						<pre><code data-trim data-noescape>
 							const scrapeSupermarketPage = async ({ 
 								supermarketLabel, url, selectors 
@@ -94,7 +100,11 @@
 								const browser = await chromium.launch({
 								  headless: true,
 								});
-								... 
+								
+								const page = await browser.newPage();
+								await page.goto(url);
+								await page.waitForTimeout(5000);
+
 								const allProducts = await page.$$eval( 
 									selectors.product, (products, object
 								) => { ... }
